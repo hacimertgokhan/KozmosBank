@@ -1,0 +1,13 @@
+lang:
+  credit-request:
+    already-requested: '&c&lERROR: &fYou already have a loan request !'
+    insufficient-quantity: '&c&lERROR: &fYou need to have &a%credit_min%&2$ &fin your account for this transaction.'
+  transfer:
+    from-bank-account:
+      insufficient: '&c&lERROR: &fYour account balance is insufficient.'
+      invalid-quantity: '&c&lERROR: &fThe amount you enter must be a number.'
+      usage: '&a&lUSAGE: &f/kb -s/send -ba/bankaccount <player> <amount>'
+    from-player-account:
+      insufficient: '&c&lERROR: &fYour account balance is insufficient.'
+      invalid-quantity: '&c&lERROR: &fThe amount you enter must be a number.'
+      usage: '&a&lUSAGE: &f/kb -s/send -pa/playeraccount <player> <amount>'

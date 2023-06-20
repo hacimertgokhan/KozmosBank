@@ -1,0 +1,12 @@
+name: KozmosBank
+version: '${project.version}'
+main: net.mixium.kozmosbank.KozmosBank
+api-version: '1.20'
+prefix: KozmosBank
+load: STARTUP
+dependencies:
+  - name: Vault
+    required: true
+authors: [Mixeration]
+description: Mixium Series, KozmosBank
+website: http://mixium.net/
