@@ -1,4 +1,14 @@
 kozmos-bank:
+  console:
+    data-created: true
+
+  $mysql:
+    driver: "com.mysql.cj.jdbc.Driver"
+    address: "localhost:3306"
+    database: "kozmosbank"
+    username: "mixeration"
+    password: "password"
+    useSSL: false
 
   startup-balance: 250
 
@@ -21,9 +31,7 @@ kozmos-bank:
       - '&8&l* &fYou have &a%player_bank_balance%&2$ &fin your bank account.'
       - ''
 
-  storage:
-    # mysql || yaml
-    type: 'yaml'
+  storage: yaml
 
   menu:
     size: 27

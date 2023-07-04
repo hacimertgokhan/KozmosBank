@@ -44,7 +44,7 @@ public class MySqlConnector extends DataAdapter {
     @Override
     public void removeData(Player player) {
         try(Connection con = this.getConnection()){
-            PreparedStatement statement = con.prepareStatement("DELETE FROM kozmosbank WHERE id=?");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM kozmosbank WHERE uuid=?");
             statement.setString(1,player.getUniqueId().toString());
             statement.executeUpdate();
         }catch (Exception exception){
@@ -60,16 +60,16 @@ public class MySqlConnector extends DataAdapter {
 
     private void setupConnection(){
         HikariConfig dbConfig = new HikariConfig();
-        String host = defaultconfig.getConfig().getString("kozmosbank.$mysql.address");
-        String database = defaultconfig.getConfig().getString("kozmosbank.$mysql.database");
+        String host = defaultconfig.getConfig().getString("kozmos-bank.$mysql.address");
+        String database = defaultconfig.getConfig().getString("kozmos-bank.$mysql.database");
 
         // Address
         dbConfig.setJdbcUrl("jdbc:mysql://" + host + "/" + database);
 
-        dbConfig.setUsername(defaultconfig.getConfig().getString("kozmosbank.$mysql.username"));
-        dbConfig.setPassword(defaultconfig.getConfig().getString("kozmosbank.$mysql.password"));
-        dbConfig.setDriverClassName(defaultconfig.getConfig().getString("kozmosbank.$mysql.driver"));
-        dbConfig.setPoolName("kozmosbank@Mixeration");
+        dbConfig.setUsername(defaultconfig.getConfig().getString("kozmos-bank.$mysql.username"));
+        dbConfig.setPassword(defaultconfig.getConfig().getString("kozmos-bank.$mysql.password"));
+        dbConfig.setDriverClassName(defaultconfig.getConfig().getString("kozmos-bank.$mysql.driver"));
+        dbConfig.setPoolName("kozmosbank@MertGokhan");
 
         // Encoding
         dbConfig.addDataSourceProperty("characterEncoding", "utf8");
@@ -77,7 +77,7 @@ public class MySqlConnector extends DataAdapter {
         dbConfig.addDataSourceProperty("useUnicode", "true");
 
         // Request mysql over SSL
-        dbConfig.addDataSourceProperty("useSSL", defaultconfig.getConfig().getString("kozmosbank.$mysql.useSSL"));
+        dbConfig.addDataSourceProperty("useSSL", defaultconfig.getConfig().getString("kozmos-bank.$mysql.useSSL"));
 
         this.hikariDataSource = new HikariDataSource(dbConfig);
 
@@ -89,41 +89,12 @@ public class MySqlConnector extends DataAdapter {
             String $0sql = "CREATE TABLE IF NOT EXISTS kozmosbank (\n" +
                     "    uuid VARCHAR(255) NOT NULL PRIMARY KEY,\n" +
                     "    player VARCHAR(255) NOT NULL,\n" +
-                    "    coin INT NOT NULL,\n" +
-                    "    lastplay INT NOT NULL,\n" +
-                    "    firstplay INT" +
-                    ")  ENGINE=INNODB;";
-            String $1sql = "CREATE TABLE IF NOT EXISTS phytData (\n" +
-                    "    world VARCHAR(255) NOT NULL PRIMARY KEY,\n" +
-                    "    x VARCHAR(255) NOT NULL,\n" +
-                    "    y VARCHAR(255) NOT NULL,\n" +
-                    "    z VARCHAR(255) NOT NULL,\n" +
-                    "    yaw VARCHAR(255),\n" +
-                    "    pitch VARCHAR(255) NOT NULL,\n" +
-                    "    phytid VARCHAR(255) NOT NULL" +
+                    "    balance INT NOT NULL" +
                     ")  ENGINE=INNODB;";
             statement.executeUpdate($0sql);
-            statement.executeUpdate($1sql);
         }catch (Exception exception){
             exception.printStackTrace();
         }
-    }
-
-    public static boolean playerExists(UUID uuid) {
-        try {
-            PreparedStatement statement = hikariDataSource.getConnection()
-                    .prepareStatement("SELECT * FROM kozmosbank WHERE UUID=?");
-            statement.setString(1, uuid.toString());
-
-            ResultSet results = statement.executeQuery();
-            if (results.next()) {
-                return true;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
 }

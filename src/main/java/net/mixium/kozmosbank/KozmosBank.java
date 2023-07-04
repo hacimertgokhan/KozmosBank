@@ -7,12 +7,15 @@ import net.mixium.kozmosbank.files.storage;
 import net.mixium.kozmosbank.mysql.MySqlConnector;
 import net.mixium.kozmosbank.tools.logger;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static net.mixium.kozmosbank.api.vault.setupEconomy;
 
 public final class KozmosBank extends JavaPlugin {
+    private static boolean isSql;
+
     private static KozmosBank instance;
     public static synchronized KozmosBank get(){return instance;}
     public static synchronized void set(KozmosBank mixium){instance = mixium;}
@@ -26,7 +29,13 @@ public final class KozmosBank extends JavaPlugin {
     private void load () {
         defaultconfig.create();
         language.create();
-        kbstorage.create();
+        if(defaultconfig.getConfig().getString("kozmos-bank.storage").equals("yaml")) {
+            isSql = false;
+            kbstorage.create();
+        } else {
+            isSql = true;
+            mySqlConnector.setupSource();
+        }
         if (!setupEconomy() ) {
             loggman.send("Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
@@ -40,5 +49,26 @@ public final class KozmosBank extends JavaPlugin {
         set(this);
         load();
 
+    }
+
+    @Override
+    public void onDisable() {
+        if(isSQL()) {
+            Bukkit.getLogger().warning("[@KozmosBank]: Saving users data into phytSql...");
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                mySqlConnector.saveData(player);
+                Bukkit.getLogger().warning(String.format("[@PhytServer]: Saved (%s) user data", Bukkit.getOnlinePlayers().size()));
+            }
+        } else {
+            Bukkit.getLogger().warning("[@KozmosBank]: Saving users data into user-data.");
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                storage.saveConfig();
+                Bukkit.getLogger().warning(String.format("[@KozmosBank]: Saved (%s) user data", Bukkit.getOnlinePlayers().size()));
+            }
+        }
+    }
+
+    public static boolean isSQL(){
+        return isSql;
     }
 }

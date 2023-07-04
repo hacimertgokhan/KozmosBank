@@ -28,36 +28,4 @@ public class DataPlayer {
         }
     }
 
-    public static int getPlayedMatches(Player player) {
-        UUID uuid = player.getUniqueId();
-        try {
-            PreparedStatement statement = mySqlConnector.getConnection()
-                    .prepareStatement("SELECT * FROM kozmosbank WHERE uuid=?");
-            statement.setString(1, uuid.toString());
-            ResultSet results = statement.executeQuery();
-            results.next();
-
-            return (results.getInt("playedmatches"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public static int getPlayerCoin(Player player) {
-        UUID uuid = player.getUniqueId();
-        try {
-            PreparedStatement statement = mySqlConnector.getConnection()
-                    .prepareStatement("SELECT * FROM kozmosbank WHERE uuid=?");
-            statement.setString(1, uuid.toString());
-            ResultSet results = statement.executeQuery();
-            results.next();
-
-            return (results.getInt("coin"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
 }
