@@ -27,5 +27,20 @@ public class DataPlayer {
             return 0;
         }
     }
+    public static boolean isStartupBonusTooked(Player player) {
+        UUID uuid = player.getUniqueId();
+        try {
+            PreparedStatement statement = mySqlConnector.getConnection()
+                    .prepareStatement("SELECT * FROM kozmosbank WHERE uuid=?");
+            statement.setString(1, uuid.toString());
+            ResultSet results = statement.executeQuery();
+            results.next();
+
+            return (results.getBoolean("startup_bonus"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

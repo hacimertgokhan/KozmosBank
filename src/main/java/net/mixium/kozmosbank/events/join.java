@@ -2,6 +2,7 @@ package net.mixium.kozmosbank.events;
 
 import net.mixium.kozmosbank.KozmosBank;
 import net.mixium.kozmosbank.api.vault;
+import net.mixium.kozmosbank.customholders.bank;
 import net.mixium.kozmosbank.files.defaultconfig;
 import net.mixium.kozmosbank.files.storage;
 import net.mixium.kozmosbank.mysql.MySqlConnector;
@@ -18,7 +19,9 @@ import java.util.PriorityQueue;
 import java.util.UUID;
 
 import static net.mixium.kozmosbank.KozmosBank.isSQL;
+import static net.mixium.kozmosbank.api.vault.getEconomy;
 import static net.mixium.kozmosbank.mysql.manager.DataSQL.playerExists;
+import static net.mixium.kozmosbank.mysql.manager.DataSQL.setStartupBalance;
 
 public class join implements Listener {
     public join(KozmosBank kozmosBank) {}
@@ -28,7 +31,8 @@ public class join implements Listener {
     public void playerjoin(PlayerJoinEvent playerJoinEvent) {
         Player user = playerJoinEvent.getPlayer();
         UUID uuid = user.getUniqueId();
-        String balance = vault.getEconomy().format(vault.getEconomy().getBalance(user));
+        String balance = getEconomy().format(getEconomy().getBalance(user));
+        String bankBalance = String.valueOf(bank.getBankBalance(user));
         boolean joininformation = defaultconfig.getConfig().getBoolean("kozmos-bank.information-message.enable");
 
         if(isSQL()) {
@@ -37,7 +41,7 @@ public class join implements Listener {
             } else {
                 if (joininformation) {
                     for (String message : defaultconfig.getConfig().getStringList("kozmos-bank.information-message.message")) {
-                        message = message.replace("%player_balance%", balance).replace("%name%", user.getName());
+                        message = message.replace("%player_bank_balance%", bankBalance).replace("%player_balance%", balance).replace("%name%", user.getName());
                         user.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
                     }
                 }
@@ -51,7 +55,7 @@ public class join implements Listener {
             } else {
                 if (joininformation) {
                     for (String message : defaultconfig.getConfig().getStringList("kozmos-bank.information-message.message")) {
-                        message = message.replace("%player_balance%", balance).replace("%name%", user.getName());
+                        message = message.replace("%player_bank_balance%", bankBalance).replace("%player_balance%", balance).replace("%name%", user.getName());
                         user.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
                     }
                 }

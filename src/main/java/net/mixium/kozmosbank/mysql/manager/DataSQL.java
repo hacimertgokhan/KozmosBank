@@ -44,10 +44,11 @@ public class DataSQL {
             String toDay = date.getMinutes()+":"+date.getHours()+":"+date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
             if (playerExists(uuid) != true) {
                 PreparedStatement insert = MySqlConnector.getConnection()
-                        .prepareStatement("INSERT INTO kozmosbank (uuid,player,balance) VALUES (?,?,?)");
+                        .prepareStatement("INSERT INTO kozmosbank (uuid,player,balance,startup_bonus) VALUES (?,?,?,?)");
                 insert.setString(1, uuid.toString());
                 insert.setString(2, player.getName());
                 insert.setInt(3, 0);
+                insert.setBoolean(4, false);
                 insert.executeUpdate();
                 if (defaultconfig.getConfig().getBoolean("kozmos-bank.console.data-created")) {
                     Bukkit.getLogger().warning("[KozmosBank] Data created for " + player.getName());
@@ -63,6 +64,19 @@ public class DataSQL {
             PreparedStatement statement = MySqlConnector.getConnection()
                     .prepareStatement("UPDATE kozmosbank SET balance=? WHERE uuid=?");
             statement.setInt(1, 0);
+            statement.setString(2, uuid.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void setStartupBalance(UUID uuid, boolean bool) {
+        try {
+            PreparedStatement statement = MySqlConnector.getConnection()
+                    .prepareStatement("UPDATE kozmosbank SET startup_bonus=? WHERE uuid=?");
+            statement.setBoolean(1, bool);
             statement.setString(2, uuid.toString());
             statement.executeUpdate();
         } catch (SQLException e) {

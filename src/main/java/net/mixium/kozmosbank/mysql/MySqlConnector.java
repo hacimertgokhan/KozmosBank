@@ -25,23 +25,6 @@ public class MySqlConnector extends DataAdapter {
         this.checkTables();
     }
 
-    @Override
-    public void saveData(Player player) {
-        try(Connection con = this.getConnection()){
-            String sql = "INSERT INTO kozmosbank(uuid, player, balance) VALUES (?,?,?) ON DUPLICATE KEY UPDATE player=player,balance=balance;";
-            PreparedStatement statement = con.prepareStatement(sql);
-
-            statement.setString(1,player.getUniqueId().toString());
-            statement.setString(2, player.getName().toString());
-            statement.setInt(3,0);
-
-            statement.executeUpdate();
-        }catch (Exception exception){
-            exception.printStackTrace();
-        }
-    }
-
-    @Override
     public void removeData(Player player) {
         try(Connection con = this.getConnection()){
             PreparedStatement statement = con.prepareStatement("DELETE FROM kozmosbank WHERE uuid=?");
@@ -89,7 +72,8 @@ public class MySqlConnector extends DataAdapter {
             String $0sql = "CREATE TABLE IF NOT EXISTS kozmosbank (\n" +
                     "    uuid VARCHAR(255) NOT NULL PRIMARY KEY,\n" +
                     "    player VARCHAR(255) NOT NULL,\n" +
-                    "    balance INT NOT NULL" +
+                    "    balance INT NOT NULL,\n" +
+                    "    startup_bonus INT NOT NULL" +
                     ")  ENGINE=INNODB;";
             statement.executeUpdate($0sql);
         }catch (Exception exception){

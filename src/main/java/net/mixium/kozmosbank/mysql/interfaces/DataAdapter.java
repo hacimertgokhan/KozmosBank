@@ -6,9 +6,6 @@ public abstract class DataAdapter {
 
     public abstract void setupSource();
 
-    public abstract void saveData(Player player);
-
-    public abstract void removeData(Player player);
 
 
 }

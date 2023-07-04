@@ -1,5 +1,6 @@
 package net.mixium.kozmosbank;
 
+import net.mixium.kozmosbank.commands.user;
 import net.mixium.kozmosbank.events.join;
 import net.mixium.kozmosbank.files.defaultconfig;
 import net.mixium.kozmosbank.files.lang;
@@ -41,6 +42,7 @@ public final class KozmosBank extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        getCommand("bank").setExecutor(new user(this));
         Bukkit.getPluginManager().registerEvents(new join(this), this);
     }
 
@@ -50,24 +52,6 @@ public final class KozmosBank extends JavaPlugin {
         load();
 
     }
-
-    @Override
-    public void onDisable() {
-        if(isSQL()) {
-            Bukkit.getLogger().warning("[@KozmosBank]: Saving users data into phytSql...");
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                mySqlConnector.saveData(player);
-                Bukkit.getLogger().warning(String.format("[@PhytServer]: Saved (%s) user data", Bukkit.getOnlinePlayers().size()));
-            }
-        } else {
-            Bukkit.getLogger().warning("[@KozmosBank]: Saving users data into user-data.");
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                storage.saveConfig();
-                Bukkit.getLogger().warning(String.format("[@KozmosBank]: Saved (%s) user data", Bukkit.getOnlinePlayers().size()));
-            }
-        }
-    }
-
     public static boolean isSQL(){
         return isSql;
     }

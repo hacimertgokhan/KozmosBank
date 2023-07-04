@@ -10,18 +10,6 @@ kozmos-bank:
     password: "password"
     useSSL: false
 
-  startup-balance: 250
-
-  loan-request:
-    minimum-balance: 10000
-    maximum-balance: 1000000
-    loans:
-      car:
-        name: '&fCar'
-        item: 'MINECART'
-
-
-
   information-message:
     enable: true
     message:
