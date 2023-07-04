@@ -4,8 +4,10 @@ import net.mixium.kozmosbank.events.join;
 import net.mixium.kozmosbank.files.defaultconfig;
 import net.mixium.kozmosbank.files.lang;
 import net.mixium.kozmosbank.files.storage;
+import net.mixium.kozmosbank.mysql.MySqlConnector;
 import net.mixium.kozmosbank.tools.logger;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static net.mixium.kozmosbank.api.vault.setupEconomy;
@@ -18,6 +20,8 @@ public final class KozmosBank extends JavaPlugin {
     private final lang language = new lang(this, "language.yml");
     private final storage kbstorage = new storage(this, "datas.yml", "storage");
     private final net.mixium.kozmosbank.tools.logger loggman = new logger(this);
+    public PluginManager pluginManager = Bukkit.getPluginManager();
+    public MySqlConnector mySqlConnector = new MySqlConnector(this);
 
     private void load () {
         defaultconfig.create();
