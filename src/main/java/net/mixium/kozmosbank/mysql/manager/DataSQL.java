@@ -72,6 +72,19 @@ public class DataSQL {
 
     }
 
+    public static void setBalance(UUID uuid, int amount) {
+        try {
+            PreparedStatement statement = MySqlConnector.getConnection()
+                    .prepareStatement("UPDATE kozmosbank SET balance=? WHERE uuid=?");
+            statement.setInt(1, amount);
+            statement.setString(2, uuid.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void setStartupBalance(UUID uuid, boolean bool) {
         try {
             PreparedStatement statement = MySqlConnector.getConnection()

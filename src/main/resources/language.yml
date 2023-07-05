@@ -3,6 +3,10 @@ lang:
   no-permission: '&c&lERROR: &fYou dont have a permission !'
   balance: '&d&lKozmosBank: &fYour bank balance is: &b%bank_balance%'
   unpermed-transaction: '&c&lERROR: &fYou cant do that !'
+  admin:
+    set-balance: '&a&lSucces: &fYour new bank balance is: &b%bank_balance%'
+    add-balance: '&a&lSucces: &fAdded %amount%$ to your account by %admin%. Your new bank balance: &b%bank_balance%$'
+    remove-balance: '&a&lSucces: &fRemoved %amount%$ from your account by %admin%. Your new bank balance: &b%bank_balance%$'
   transaction:
     send:
       sended: '&a&lSucces: &fYou sended &b%amount%$ &fto %b%player%'

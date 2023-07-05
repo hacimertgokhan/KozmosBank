@@ -1,19 +1,16 @@
-package net.mixium.kozmosbank.customholders;
+package net.mixium.kozmosbank.methods;
 
-import net.md_5.bungee.api.ChatMessageType;
 import net.mixium.kozmosbank.files.lang;
 import net.mixium.kozmosbank.files.storage;
 import net.mixium.kozmosbank.mysql.manager.DataPlayer;
 import net.mixium.kozmosbank.mysql.manager.DataSQL;
 import net.mixium.kozmosbank.tools.storage.transactions;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import static net.mixium.kozmosbank.KozmosBank.isSQL;
-import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
 
-public class bank {
+public class $bank {
 
 
 

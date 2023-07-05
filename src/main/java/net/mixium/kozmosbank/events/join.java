@@ -1,12 +1,9 @@
 package net.mixium.kozmosbank.events;
 
 import net.mixium.kozmosbank.KozmosBank;
-import net.mixium.kozmosbank.api.vault;
-import net.mixium.kozmosbank.customholders.bank;
+import net.mixium.kozmosbank.methods.$bank;
 import net.mixium.kozmosbank.files.defaultconfig;
 import net.mixium.kozmosbank.files.storage;
-import net.mixium.kozmosbank.mysql.MySqlConnector;
-import net.mixium.kozmosbank.mysql.manager.DataPlayer;
 import net.mixium.kozmosbank.mysql.manager.DataSQL;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,13 +12,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.PriorityQueue;
 import java.util.UUID;
 
 import static net.mixium.kozmosbank.KozmosBank.isSQL;
 import static net.mixium.kozmosbank.api.vault.getEconomy;
 import static net.mixium.kozmosbank.mysql.manager.DataSQL.playerExists;
-import static net.mixium.kozmosbank.mysql.manager.DataSQL.setStartupBalance;
 
 public class join implements Listener {
     public join(KozmosBank kozmosBank) {}
@@ -32,7 +27,7 @@ public class join implements Listener {
         Player user = playerJoinEvent.getPlayer();
         UUID uuid = user.getUniqueId();
         String balance = getEconomy().format(getEconomy().getBalance(user));
-        String bankBalance = String.valueOf(bank.getBankBalance(user));
+        String bankBalance = String.valueOf($bank.getBankBalance(user));
         boolean joininformation = defaultconfig.getConfig().getBoolean("kozmos-bank.information-message.enable");
 
         if(isSQL()) {

@@ -19,7 +19,7 @@ kozmos-bank:
       - '&8&l* &fYou have &a%player_bank_balance%&2$ &fin your bank account.'
       - ''
 
-  storage: yaml
+  storage: mysql
 
   menu:
     size: 27

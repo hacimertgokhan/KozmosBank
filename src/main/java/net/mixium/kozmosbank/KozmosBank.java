@@ -1,5 +1,6 @@
 package net.mixium.kozmosbank;
 
+import net.mixium.kozmosbank.commands.admin;
 import net.mixium.kozmosbank.commands.user;
 import net.mixium.kozmosbank.events.join;
 import net.mixium.kozmosbank.files.defaultconfig;
@@ -43,6 +44,7 @@ public final class KozmosBank extends JavaPlugin {
             return;
         }
         getCommand("bank").setExecutor(new user(this));
+        getCommand("kozmosbank").setExecutor(new admin(this));
         pluginManager.registerEvents(new join(this), this);
     }
 

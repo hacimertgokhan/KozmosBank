@@ -1,7 +1,6 @@
 package net.mixium.kozmosbank.commands;
 
 import net.mixium.kozmosbank.KozmosBank;
-import net.mixium.kozmosbank.customholders.bank;
 import net.mixium.kozmosbank.files.lang;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,8 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static net.mixium.kozmosbank.customholders.bank.getBankBalance;
-import static net.mixium.kozmosbank.customholders.bank.transaction;
+import static net.mixium.kozmosbank.methods.$bank.getBankBalance;
+import static net.mixium.kozmosbank.methods.$bank.transaction;
 import static net.mixium.kozmosbank.tools.integer.isInteger;
 
 public class user implements CommandExecutor {
@@ -38,7 +37,7 @@ public class user implements CommandExecutor {
                         if (player.getName().equalsIgnoreCase(commandSender.getName())) {
                             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.unpermed-transaction")));
                         } else {
-                            if (player.isOnline()) {
+                            if (player.isOnline() && (!(player == null))) {
                                 if (isInteger(strings[2])) {
                                     if (getBankBalance(player) >= Integer.valueOf(strings[2])) {
                                         transaction("send", ((Player) commandSender).getPlayer(), player, Integer.valueOf(strings[2]));

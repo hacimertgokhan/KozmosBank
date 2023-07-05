@@ -14,3 +14,7 @@ commands:
   bank:
     permission: kozmosbank.user
     description: Kozmosbank user command.
+
+  kozmosbank:
+    permission: kozmosbank.admin
+    description: Kozmosbank admin command.

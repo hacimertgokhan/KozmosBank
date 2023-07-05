@@ -15,7 +15,7 @@ public class DataPlayer {
     public static int getPlayerBalance(Player player) {
         UUID uuid = player.getUniqueId();
         try {
-            PreparedStatement statement = mySqlConnector.getConnection()
+            PreparedStatement statement = MySqlConnector.getConnection()
                     .prepareStatement("SELECT * FROM kozmosbank WHERE uuid=?");
             statement.setString(1, uuid.toString());
             ResultSet results = statement.executeQuery();
