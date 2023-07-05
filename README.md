@@ -30,8 +30,6 @@ In addition, Kozmos Bank, which is open source, can be freely used and developed
 |-------------------|------------------------|--------------------------------------------------------------|
 | /Bank             | kozmosbank.user        | Kozmos Bank user command for default players                 |
 | /KozmosBank       | kozmosbank.admin       | Kozmos Bank admin command for developers, owners and admins. |
-| /KozmosReader     | kozmosbank.read        | Kozmos Bank user data reader                                 |
-| /KozmosConnection | kozmosbank.dataholders | Kozmos Bank data holders connection information.             |
 
 <br>
 
