@@ -43,14 +43,13 @@ public final class KozmosBank extends JavaPlugin {
             return;
         }
         getCommand("bank").setExecutor(new user(this));
-        Bukkit.getPluginManager().registerEvents(new join(this), this);
+        pluginManager.registerEvents(new join(this), this);
     }
 
     @Override
     public void onEnable() {
         set(this);
         load();
-
     }
     public static boolean isSQL(){
         return isSql;

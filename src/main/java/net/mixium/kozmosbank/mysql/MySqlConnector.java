@@ -73,7 +73,7 @@ public class MySqlConnector extends DataAdapter {
                     "    uuid VARCHAR(255) NOT NULL PRIMARY KEY,\n" +
                     "    player VARCHAR(255) NOT NULL,\n" +
                     "    balance INT NOT NULL,\n" +
-                    "    startup_bonus INT NOT NULL" +
+                    "    startup_bonus BOOLEAN NOT NULL" +
                     ")  ENGINE=INNODB;";
             statement.executeUpdate($0sql);
         }catch (Exception exception){
