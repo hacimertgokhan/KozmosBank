@@ -37,19 +37,23 @@ public class user implements CommandExecutor {
                         if (player.getName().equalsIgnoreCase(commandSender.getName())) {
                             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.unpermed-transaction")));
                         } else {
-                            if (player.isOnline() && (!(player == null))) {
-                                if (isInteger(strings[2])) {
-                                    if (getBankBalance(player) >= Integer.valueOf(strings[2])) {
-                                        transaction("send", ((Player) commandSender).getPlayer(), player, Integer.valueOf(strings[2]));
-                                        return true;
+                            if (player == null) {
+                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                            } else {
+                                if (player.isOnline()) {
+                                    if (isInteger(strings[2])) {
+                                        if (getBankBalance(player) >= Integer.valueOf(strings[2])) {
+                                            transaction("send", ((Player) commandSender).getPlayer(), player, Integer.valueOf(strings[2]));
+                                            return true;
+                                        } else {
+                                            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-enough-money")));
+                                        }
                                     } else {
-                                        commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-enough-money")));
+                                        commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
                                     }
                                 } else {
-                                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
+                                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
                                 }
-                            } else {
-                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
                             }
                         }
                     }

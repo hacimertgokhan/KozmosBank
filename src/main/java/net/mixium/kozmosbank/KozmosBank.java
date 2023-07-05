@@ -24,6 +24,7 @@ public final class KozmosBank extends JavaPlugin {
     private final defaultconfig defaultconfig = new defaultconfig(this, "default-config.yml");
     private final lang language = new lang(this, "language.yml");
     private final storage kbstorage = new storage(this, "datas.yml", "storage");
+    // private final storage profile = new storage(this, "profile.yml", "storage");
     private final net.mixium.kozmosbank.tools.logger loggman = new logger(this);
     public PluginManager pluginManager = Bukkit.getPluginManager();
     public MySqlConnector mySqlConnector = new MySqlConnector(this);
@@ -31,6 +32,7 @@ public final class KozmosBank extends JavaPlugin {
     private void load () {
         defaultconfig.create();
         language.create();
+        // profile.create();
         if(defaultconfig.getConfig().getString("kozmos-bank.storage").equals("yaml")) {
             isSql = false;
             kbstorage.create();

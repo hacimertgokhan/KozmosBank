@@ -1,7 +1,6 @@
 kozmos-bank:
   console:
     data-created: true
-
   $mysql:
     driver: "com.mysql.cj.jdbc.Driver"
     address: "localhost:3306"
@@ -9,7 +8,6 @@ kozmos-bank:
     username: "mixeration"
     password: "password"
     useSSL: false
-
   information-message:
     enable: true
     message:
@@ -18,18 +16,4 @@ kozmos-bank:
       - '&8&l* &fYour current balance is: &a%player_balance%&f.'
       - '&8&l* &fYou have &a%player_bank_balance%&2$ &fin your bank account.'
       - ''
-
   storage: mysql
-
-  menu:
-    size: 27
-    title: 'KozmosBank'
-    item1:
-      display-name: '&fHello &a%name% &e!'
-      item: 'BOOK'
-      slot: 11
-      lore:
-        - ''
-        - '&fBalance: %player_balance%'
-        - '&fBank Balance: %player_bank_balance%'
-        - ''

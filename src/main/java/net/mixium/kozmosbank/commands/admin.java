@@ -56,50 +56,64 @@ public class admin implements CommandExecutor {
                         }
                     } else if(strings[0].equalsIgnoreCase("reset")) {
                         Player player = Bukkit.getPlayer(strings[1]);
-                        if (player.isOnline() && (!(player == null))) {
-                            if(isSQL()) {
-                                DataSQL.resetBalance(player.getUniqueId());
-                            } else {
-                                transactions.fileStorage$resetBalance(player);
-                            }
-                            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lKozmosBank: &f" + player.getName() + "`s bank account reseted."));
-                        } else {
+                        if (player == null) {
                             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                        } else {
+                            if (player.isOnline()) {
+                                if (isSQL()) {
+                                    DataSQL.resetBalance(player.getUniqueId());
+                                } else {
+                                    transactions.fileStorage$resetBalance(player);
+                                }
+                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lKozmosBank: &f" + player.getName() + "`s bank account reseted."));
+                            } else {
+                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                            }
                         }
                     }
                 } else if (strings.length == 3) {
+                    Player player = Bukkit.getPlayer(strings[1]);
                     if(strings[0].equalsIgnoreCase("set")) {
-                        Player player = Bukkit.getPlayer(strings[1]);
-                        if (player.isOnline() && (!(player == null))) {
-                            if (isInteger(strings[2])) {
-                                admin$setBalance(((Player) commandSender).getPlayer(), player, Integer.parseInt(strings[2]));
-                            } else {
-                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
-                            }
-                        } else {
+                        if (player == null) {
                             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                        } else {
+                            if (player.isOnline()) {
+                                if (isInteger(strings[2])) {
+                                    admin$setBalance(((Player) commandSender).getPlayer(), player, Integer.parseInt(strings[2]));
+                                } else {
+                                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
+                                }
+                            } else {
+                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                            }
                         }
                     } else if(strings[0].equalsIgnoreCase("add")) {
-                        Player player = Bukkit.getPlayer(strings[1]);
-                        if (player.isOnline() && (!(player == null))) {
-                            if (isInteger(strings[2])) {
-                                admin$addBalance(((Player) commandSender).getPlayer(), player, Integer.parseInt(strings[2]));
-                            } else {
-                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
-                            }
-                        } else {
+                        if (player == null) {
                             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                        } else {
+                            if (player.isOnline()) {
+                                if (isInteger(strings[2])) {
+                                    admin$addBalance(((Player) commandSender).getPlayer(), player, Integer.parseInt(strings[2]));
+                                } else {
+                                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
+                                }
+                            } else {
+                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                            }
                         }
                     } else if(strings[0].equalsIgnoreCase("remove")) {
-                        Player player = Bukkit.getPlayer(strings[1]);
-                        if (player.isOnline() && (!(player == null))) {
-                            if (isInteger(strings[2])) {
-                                admin$remBalance(((Player) commandSender).getPlayer(), player, Integer.parseInt(strings[2]));
-                            } else {
-                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
-                            }
-                        } else {
+                        if (player == null) {
                             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                        } else {
+                            if (player.isOnline()) {
+                                if (isInteger(strings[2])) {
+                                    admin$remBalance(((Player) commandSender).getPlayer(), player, Integer.parseInt(strings[2]));
+                                } else {
+                                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.must-be-number")));
+                                }
+                            } else {
+                                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getConfig().getString("lang.not-online")));
+                            }
                         }
                     } else {
                         help(((Player) commandSender).getPlayer());
