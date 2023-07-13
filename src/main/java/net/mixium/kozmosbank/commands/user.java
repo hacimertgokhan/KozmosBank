@@ -69,13 +69,8 @@ public class user implements CommandExecutor {
     }
 
     public void help(Player player){
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&d&lKozmosBank"));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "    &f/bank balance"));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "    &f/bank send <player> <amount>"));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "    &f/bank request <player> <amount>"));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "    &f/bank accept"));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "    &f/bank deny"));
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
+        for(String message : lang.getConfig().getStringList("lang.help")) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        }
     }
 }

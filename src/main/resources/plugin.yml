@@ -18,3 +18,10 @@ commands:
   kozmosbank:
     permission: kozmosbank.admin
     description: Kozmosbank admin command.
+
+  kozmoscredit:
+    permission: kozmosbank.user
+    aliases:
+      - kc
+      - kozmosc
+    description: Kozmosbank credit command.

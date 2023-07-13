@@ -1,4 +1,34 @@
 kozmos-bank:
+  credit:
+    enable: true
+    menu-title: "&8Credits"
+    send-menu-message: true
+    credit-officers:
+      title: '&aAll credit officers...'
+      list:
+        - Mixeration
+        - Player1
+        - Officer
+    credits:
+      100$:
+        payback-time: 10
+        material: "PAPER"
+        display: "&a100$ Credit"
+        slot: 10
+        lore:
+          - ""
+          - "&8&l* &f100 dollar credit funds."
+          - "&8&l* &fPayback time is 10 minute."
+          - "&8&l* &fPayback tax: %10."
+          - ""
+        tax: 0.10
+
+# I will explain that tax system with example.
+# That method works like this: (amount + (amount*tax))
+# Soo please do not delete "0."
+# Use like 0.50 = 50% or 0.20 = 20%
+
+
   console:
     data-created: true
   $mysql:
@@ -16,4 +46,4 @@ kozmos-bank:
       - '&8&l* &fYour current balance is: &a%player_balance%&f.'
       - '&8&l* &fYou have &a%player_bank_balance%&2$ &fin your bank account.'
       - ''
-  storage: mysql
+  storage: yaml

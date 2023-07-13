@@ -1,0 +1,8 @@
+1000$:
+  display-name: "&a1000$"
+  credit-to-be-given: 1000
+  lore: "&8&l* &fRefund amount: &a%credit_refund_amount%"
+  material: PAPER
+  payback-time: 5m
+  slot: 10
+  refund-tax: 0.10

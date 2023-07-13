@@ -3,6 +3,18 @@ lang:
   no-permission: '&c&lERROR: &fYou dont have a permission !'
   balance: '&d&lKozmosBank: &fYour bank balance is: &b%bank_balance%'
   unpermed-transaction: '&c&lERROR: &fYou cant do that !'
+  menu-opened: '&aHere is all credits...'
+  cannot-found: '&c&lERROR: &fI cant found any credit name like that. Get right names from &a/kc list'
+  credit-request-help:
+    - ""
+    - "&d&lCredits"
+    - " &7/KozmosCredits|kc [(ocf|online-credit-officers), (list|l), (credit-request <credit-name>)]"
+  help:
+    - ""
+    - "&d&lKozmosBank &f- &70.01"
+    - "   &7/Bank balance"
+    - "   &7/Bank send <player> <amount>"
+    - ""
   admin:
     set-balance: '&a&lSucces: &fYour new bank balance is: &b%bank_balance%'
     add-balance: '&a&lSucces: &fAdded %amount%$ to your account by %admin%. Your new bank balance: &b%bank_balance%$'
